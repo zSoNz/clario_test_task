@@ -25,10 +25,10 @@ void main() async {
       map[keys?[j]] = values?[j];
     }
 
-    File file = File('lib/l10n/app_$locale.arb'); //load the json file
+    File file = File('lib/l10n/app_$locale.arb');
 
     file.writeAsStringSync(
       json.encode(map),
-    ); //write
+    );
   }
 }

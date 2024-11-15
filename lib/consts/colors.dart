@@ -12,14 +12,14 @@ Color hexToColor(String hex) {
 
 abstract class ColorConstants {
   static Color disabled = hexToColor('#151D5133');
-  static Color stroke = hexToColor('#151D5133');
-  static Color strokeFocused = hexToColor('#151D51');
+  static Color stroke = Colors.transparent;
+  static Color strokeFocused = hexToColor('#6F91BC');
   static Color strokeDark = hexToColor('#404658');
   static Color statesError = hexToColor('#EB3837');
   static Color statesSuccess = hexToColor('#6EA94D');
 
-  static Color surfacePrimary = hexToColor('#E0EDFB');
-  static Color surfacePrimaryLighter = hexToColor('#F4F9FF');
+  static Color surfacePrimary = hexToColor('#F4F9FF');
+  static Color surfacePrimaryLighter = hexToColor('#E0EDFB');
 
   static Color onSurfacePrimary = hexToColor('#4A4E71');
 
@@ -28,8 +28,8 @@ abstract class ColorConstants {
   static Color onSurfaceButtonPrimary = hexToColor('#FFFFFF');
 
   static LinearGradient surfacePrimaryGradient = LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
+    begin: Alignment.topLeft,
+    end: Alignment.bottomCenter,
     colors: [surfacePrimary, surfacePrimaryLighter],
   );
 
