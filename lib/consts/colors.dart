@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 Color hexToColor(String hex) {
@@ -16,6 +14,7 @@ abstract class ColorConstants {
   static Color disabled = hexToColor('#151D5133');
   static Color stroke = hexToColor('#151D5133');
   static Color strokeFocused = hexToColor('#151D51');
+  static Color strokeDark = hexToColor('#404658');
   static Color statesError = hexToColor('#EB3837');
   static Color statesSuccess = hexToColor('#6EA94D');
 
