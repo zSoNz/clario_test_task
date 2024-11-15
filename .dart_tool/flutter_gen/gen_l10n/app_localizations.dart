@@ -134,6 +134,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Success'**
   String get success;
+
+  /// No description provided for @should_not_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Should not be empty'**
+  String get should_not_empty;
+
+  /// No description provided for @fix_all_errors.
+  ///
+  /// In en, this message translates to:
+  /// **'Please address all the errors first.'**
+  String get fix_all_errors;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

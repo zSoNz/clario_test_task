@@ -15,8 +15,8 @@ abstract class ColorConstants {
   static Color stroke = Colors.transparent;
   static Color strokeFocused = hexToColor('#6F91BC');
   static Color strokeDark = hexToColor('#404658');
-  static Color statesError = hexToColor('#EB3837');
-  static Color statesSuccess = hexToColor('#6EA94D');
+  static Color statesError = hexToColor('#FF8080');
+  static Color statesSuccess = hexToColor('#27B274').withOpacity(0.7);
 
   static Color surfacePrimary = hexToColor('#F4F9FF');
   static Color surfacePrimaryLighter = hexToColor('#E0EDFB');

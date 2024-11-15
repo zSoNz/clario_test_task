@@ -61,9 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         onPressed: () {
-          if (widget.viewModel.formKey.currentState!.validate()) {
-            context.router.pushNamed('/sign_up');
-          }
+          widget.viewModel.save();
         },
       ),
     );
@@ -71,19 +69,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _validationRules() {
     final l10n = AppLocalizations.of(context)!;
-    final rules = widget.viewModel.rules;
+    final rules = widget.viewModel.rulesSubscription;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...rules.map(
-            (rule) => Padding(
-              padding: const EdgeInsets.only(bottom: 4, left: 20),
-              child: _ruleField(rule, l10n),
-            ),
-          ),
-        ],
+      child: StreamBuilder(
+        stream: rules.stream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const SizedBox.shrink();
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...snapshot.data!.map(
+                (rule) => Padding(
+                  padding: const EdgeInsets.only(bottom: 4, left: 20),
+                  child: _ruleField(rule, l10n),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -128,27 +136,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _emailField() {
     final l10n = AppLocalizations.of(context)!;
 
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: true,
-      decoration: AuthTextFieldDecorator(
-        placeholder: l10n.enter_email,
-        context: context,
-      ),
+    return StreamBuilder(
+      stream: widget.viewModel.isEmailCorrectSubscription,
+      builder: (context, snapshot) {
+        return TextFormField(
+          controller: widget.viewModel.emailController,
+          keyboardType: TextInputType.emailAddress,
+          autofocus: true,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return widget.viewModel.isFieldNonEmpty(value)
+                ? null
+                : l10n.should_not_empty;
+          },
+          onSaved: (newValue) => widget.viewModel.email = newValue ?? '',
+          decoration: AuthTextFieldDecorator(
+            placeholder: l10n.enter_email,
+            context: context,
+            forceColor: snapshot.data == true
+                ? ColorConstants.statesSuccess
+                : ColorConstants.onSurfacePrimary,
+          ),
+          style: _inputStyle(snapshot.data == true),
+        );
+      },
     );
   }
 
   Widget _passwordField() {
     final l10n = AppLocalizations.of(context)!;
 
-    return TextFormField(
-      obscureText: !widget.viewModel.passwordIsVisible,
-      keyboardType: TextInputType.visiblePassword,
-      decoration: AuthTextFieldDecorator(
-        placeholder: l10n.create_password,
-        context: context,
-        suffixIcon: _passwordVisibilityButton(),
-      ),
+    return StreamBuilder(
+      stream: widget.viewModel.isPasswordCorrectSubscription,
+      builder: (context, snapshot) {
+        return TextFormField(
+          obscureText: !widget.viewModel.passwordIsVisible,
+          keyboardType: TextInputType.visiblePassword,
+          controller: widget.viewModel.passwordController,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: AuthTextFieldDecorator(
+            placeholder: l10n.create_password,
+            context: context,
+            suffixIcon: _passwordVisibilityButton(),
+            forceColor:
+                snapshot.data == true ? ColorConstants.statesSuccess : null,
+          ),
+          style: _inputStyle(snapshot.data == true),
+        );
+      },
+    );
+  }
+
+  TextStyle? _inputStyle(bool isSucces) {
+    final styles = Theme.of(context).textTheme;
+
+    return styles.bodyLarge?.copyWith(
+      color: isSucces
+          ? ColorConstants.statesSuccess
+          : ColorConstants.onSurfacePrimary,
     );
   }
 

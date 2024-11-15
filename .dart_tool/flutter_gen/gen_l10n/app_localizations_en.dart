@@ -26,4 +26,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get success => 'Success';
+
+  @override
+  String get should_not_empty => 'Should not be empty';
+
+  @override
+  String get fix_all_errors => 'Please address all the errors first.';
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 InputDecoration AuthTextFieldDecorator({
   required String placeholder,
   required BuildContext context,
+  Color? forceColor,
   Widget? suffixIcon,
 }) {
   final styles = Theme.of(context).textTheme;
@@ -19,20 +20,7 @@ InputDecoration AuthTextFieldDecorator({
           );
         } else {
           return styles.bodyLarge!.copyWith(
-            color: ColorConstants.onSurfacePrimary,
-          );
-        }
-      },
-    ),
-    labelStyle: WidgetStateTextStyle.resolveWith(
-      (Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return styles.bodyLarge!.copyWith(
-            color: ColorConstants.disabled,
-          );
-        } else {
-          return styles.bodyLarge!.copyWith(
-            color: ColorConstants.onSurfacePrimary,
+            color: forceColor ?? ColorConstants.onSurfacePrimary,
           );
         }
       },
@@ -42,7 +30,16 @@ InputDecoration AuthTextFieldDecorator({
     floatingLabelBehavior: FloatingLabelBehavior.never,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: ColorConstants.stroke, width: 0),
+      borderSide: BorderSide(
+        color: forceColor ?? ColorConstants.stroke,
+        width: 0,
+      ),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(
+        color: forceColor ?? ColorConstants.statesError,
+      ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
@@ -59,7 +56,7 @@ InputDecoration AuthTextFieldDecorator({
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(
-        color: ColorConstants.strokeFocused,
+        color: forceColor ?? ColorConstants.strokeFocused,
       ),
     ),
   );
