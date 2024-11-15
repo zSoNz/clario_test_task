@@ -25,6 +25,7 @@ abstract class ColorConstants {
 
   static Color surfaceButtonPrimary = hexToColor('#4B65FF');
   static Color surfaceButtonLighter = hexToColor('#70C3FF');
+
   static Color onSurfaceButtonPrimary = hexToColor('#FFFFFF');
 
   static LinearGradient surfacePrimaryGradient = LinearGradient(

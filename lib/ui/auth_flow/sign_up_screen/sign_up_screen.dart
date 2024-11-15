@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clario_test_task/consts/colors.dart';
 import 'package:clario_test_task/ui/auth_flow/sign_up_screen/models/sign_up_validation_rule.dart';
-import 'package:clario_test_task/ui/auth_flow/sign_up_screen/models/web_container.dart';
+import 'package:clario_test_task/ui/auth_flow/widgets/web_container.dart';
 import 'package:clario_test_task/ui/auth_flow/sign_up_screen/sign_up_screen_view_model.dart';
 import 'package:clario_test_task/ui/auth_flow/widgets/auth_background_container.dart';
 import 'package:clario_test_task/ui/auth_flow/widgets/auth_text_field_decoration.dart';
@@ -20,6 +20,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  @override
+  void dispose() {
+    widget.viewModel.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

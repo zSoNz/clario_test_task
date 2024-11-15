@@ -44,6 +44,15 @@ class SignUpScreenViewModel {
     });
   }
 
+  void dispose() {
+    rulesSubscription.close();
+    isPasswordCorrectSubscription.close();
+    isEmailCorrectSubscription.close();
+
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   bool isFieldNonEmpty(String? value) {
     return value != null && value.isNotEmpty;
   }
