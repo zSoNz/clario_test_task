@@ -7,3 +7,9 @@ Flutter version is 3.24.3
 https://pub.dev/packages/auto_route
 
 dart run build_runner watch
+
+# How to update assets
+
+https://pub.dev/packages/flutter_gen_runner
+
+dart run build_runner watch
