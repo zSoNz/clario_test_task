@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clario_test_task/consts/colors.dart';
 import 'package:clario_test_task/ui/auth_flow/sign_up_screen/models/sign_up_validation_rule.dart';
+import 'package:clario_test_task/ui/auth_flow/sign_up_screen/models/web_container.dart';
 import 'package:clario_test_task/ui/auth_flow/sign_up_screen/sign_up_screen_view_model.dart';
 import 'package:clario_test_task/ui/auth_flow/widgets/auth_background_container.dart';
 import 'package:clario_test_task/ui/auth_flow/widgets/auth_text_field_decoration.dart';
@@ -22,23 +23,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AuthBackgroundContainer(child: _body()),
+      body: AuthBackgroundContainer(
+        child: _body(),
+      ),
     );
   }
 
   Widget _body() {
-    return Column(
-      children: [
-        const Spacer(flex: 3),
-        _header(),
-        const SizedBox(height: 40),
-        _form(),
-        const SizedBox(height: 20),
-        _validationRules(),
-        const SizedBox(height: 40),
-        _continueButton(),
-        const Spacer(flex: 11),
-      ],
+    final double() = MediaQuery.of(context).size.height;
+
+    return WebContainer(
+      child: SingleChildScrollView(
+        child: Stack(children: [
+          Align(
+            alignment: Alignment.center,
+            heightFactor: 1.56,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _header(),
+                const SizedBox(height: 40, width: double.infinity),
+                _form(),
+                const SizedBox(height: 20),
+                _validationRules(),
+                const SizedBox(height: 40),
+                _continueButton(),
+              ],
+            ),
+          ),
+        ]),
+      ),
     );
   }
 

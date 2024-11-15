@@ -1,3 +1,4 @@
+import 'package:clario_test_task/consts/colors.dart';
 import 'package:clario_test_task/helpers/routers/auto_app_router.dart';
 import 'package:clario_test_task/ui/auth_flow/sign_up_screen/models/sign_up_validation_rule.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,8 @@ class SignUpScreenViewModel {
 
     final isSuccess = isValide == true && isPasswordValid;
     final text = isSuccess ? l10n?.success : l10n?.fix_all_errors;
-    final color = isSuccess ? Colors.green : Colors.red;
+    final color =
+        isSuccess ? ColorConstants.statesSuccess : ColorConstants.statesError;
 
     final snack = SnackBar(
       content: Text(
